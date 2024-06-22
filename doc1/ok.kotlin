@@ -1,0 +1,23 @@
+Amplituda amplituda = new Amplituda(context);
+
+/**
+ * AmplitudaProcessingOutput<T> - wrapper class for Amplituda processing result.
+ * This class stores the output audio processing data
+ * and provides functions to obtain the result
+ * Generic type T - audio source type: File, String (URL or path), Integer (res/raw) 
+ */
+AmplitudaProcessingOutput<T> processingOutput;
+
+/* Process audio */
+
+// Local audio file
+processingOutput = amplituda.processAudio(new File("/storage/emulated/0/Music/Linc - Amplituda.mp3"));
+
+// Path to local audio file
+processingOutput = amplituda.processAudio("/storage/emulated/0/Music/Linc - Amplituda.mp3");
+
+// URL audio
+processingOutput = amplituda.processAudio("https://audio-url-example.com/amplituda.mp3");
+
+// Resource audio
+processingOutput = amplituda.processAudio(R.raw.amplituda);
