@@ -1,0 +1,20 @@
+
+/* Step 1: create Amplituda */
+Amplituda amplituda = new Amplituda(context);
+
+/* Step 2: process audio and handle result */
+amplituda.processAudio("/storage/emulated/0/Music/Linc - Amplituda.mp3")
+        .get(result -> {
+            List<Integer> amplitudesData = result.amplitudesAsList();
+            List<Integer> amplitudesForFirstSecond = result.amplitudesForSecond(1);
+            long duration = result.getAudioDuration(AmplitudaResult.DurationUnit.SECONDS);
+            String source = result.getAudioSource();
+            InputAudio.Type sourceType = result.getInputAudioType();
+            // etc
+        }, exception -> {
+            if(exception instanceof AmplitudaIOException) {
+                System.out.println("IO Exception!");
+            }
+        });
+
+/* And that's all! You can read full documentation below for more information about Amplituda features */
