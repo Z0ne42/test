@@ -1,0 +1,39 @@
+/**
+ * AmplitudaProgressListener - progress listener class.
+ * This class has 3 methods that describe current progress:
+ *  - void onStartProgress() - amplituda start processing (optional)
+ *  - void onStopProgress()  - amplituda stop processing (optional)
+ *  - void onProgress(ProgressOperation operation, int progress) -
+ *       amplituda process audio and share current operation and progress in percent (0-100)
+ * onProgress() also inform about current operation:
+ *  - PROCESSING  - amplituda start process audio
+ *  - DECODING    - amplituda decode raw/res audio 
+ *  - DOWNLOADING - amplituda download audio from url 
+ */
+amplituda.processAudio(
+    <audio>,
+    new AmplitudaProgressListener() {
+        @Override
+        public void onStartProgress() {
+            super.onStartProgress();
+            System.out.println("Start Progress");
+        }
+
+        @Override
+        public void onStopProgress() {
+            super.onStopProgress();
+            System.out.println("Stop Progress");
+        }
+
+        @Override
+        public void onProgress(ProgressOperation operation, int progress) {
+            String currentOperation = "";
+            switch (operation) {
+                case PROCESSING: currentOperation = "Process audio"; break;
+                case DECODING: currentOperation = "Decode resource"; break;
+                case DOWNLOADING: currentOperation = "Download audio from url"; break;
+            }
+            System.out.printf("%s: %d%% %n", currentOperation, progress);
+        }
+    }
+)
